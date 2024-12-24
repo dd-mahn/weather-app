@@ -1,0 +1,89 @@
+/* @link https://utopia.fyi/clamp/calculator?a=320,1440,80—164|48—72|10—12|14—18|28—36|40—48|14—16|17—20|20—32 */
+
+:root {
+  --font-heading: 'Dosis', serif;
+  --font-body: 'Lato', serif;
+  --weight-heading: 900;
+  --weight-medium: 600;
+  --weight-regular: 400;
+  --weight-light: 300;
+  --size-h1: clamp(80px, 56px + 7.5vw, 164px);
+  --size-h2: clamp(48px, 41.1429px + 2.1429vw, 72px);
+  --size-text-xs: clamp(10px, 9.4286px + 0.1786vw, 12px);
+  --size-text-s: clamp(14px, 12.8571px + 0.3571vw, 18px);
+  --size-text-m: clamp(28px, 25.7143px + 0.7143vw, 36px);
+  --size-h3: clamp(40px, 37.7143px + 0.7143vw, 48px);
+  --size-button-s: clamp(14px, 13.4286px + 0.1786vw, 16px);
+  --size-button-m: clamp(17px, 16.1429px + 0.2679vw, 20px);
+  --size-button-l: clamp(20px, 16.5714px + 1.0714vw, 32px);
+}
+
+h1,h2,h3{
+  line-height: 1.2;
+  letter-spacing: -3%;
+}
+
+p, a, span, button{
+  line-height: 1.5;
+}
+
+.text-h1 {
+  font-size: var(--size-h1);
+  font-family: var(--font-heading);
+  font-weight: var(--weight-heading);
+  
+}
+
+.text-h2 {
+  font-size: var(--size-h2);
+  font-family: var(--font-heading);
+  font-weight: var(--weight-medium);
+}
+
+.text-h3 {
+  font-size: var(--size-h3);
+  font-family: var(--font-heading);
+  font-weight: var(--weight-medium);
+}
+
+.text-xs {
+  font-size: var(--size-text-xs);
+  font-family: var(--font-body);
+  font-weight: var(--weight-light);
+}
+
+.text-s {
+  font-size: var(--size-text-s);
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+}
+
+.text-m {
+  font-size: var(--size-text-m);
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+}
+
+.text-l {
+  font-size: var(--size-h3);
+  font-family: var(--font-heading);
+  font-weight: var(--weight-regular);
+}
+
+.button-s {
+  font-size: var(--size-button-s);
+  font-family: var(--font-body);
+  font-weight: var(--weight-medium);
+}
+
+.button-m {
+  font-size: var(--size-button-m);
+  font-family: var(--font-body);
+  font-weight: var(--weight-medium);
+}
+
+.button-l {
+  font-size: var(--size-button-l);
+  font-family: var(--font-body);
+  font-weight: var(--weight-medium);
+}

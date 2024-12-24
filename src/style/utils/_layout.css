@@ -1,0 +1,9 @@
+.padding-container {
+  padding: clamp(36px, 28px + 2.5vw, 64px) clamp(18px, -13.4286px + 9.8214vw, 128px);
+}
+
+.padding-current{
+  padding: clamp(0.5rem, 0.2857rem + 1.0714vw, 1.25rem) clamp(0.75rem, 0.3929rem + 1.7857vw, 2rem);
+}
+
+

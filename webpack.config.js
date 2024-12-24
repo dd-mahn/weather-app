@@ -17,7 +17,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./src/index.html",
       favicon: "./src/assets/favicon_io/favicon.ico",
-      favicon: "./src/assets/favicon_io/favicon.ico",
       meta: {
         'theme-color': '#ffffff',
         'apple-mobile-web-app-capable': 'yes',
@@ -41,10 +40,6 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.s[ac]ss$/i,
-        use: ["style-loader", "css-loader", "sass-loader"],
-      },
-      {
         test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
         type: "asset/resource",
       },
@@ -52,6 +47,14 @@ module.exports = {
         test: /\.tsx?$/,
         use: "ts-loader",
         exclude: /node_modules/,
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader',
+        ],
       },
     ],
   },
@@ -64,5 +67,7 @@ module.exports = {
   devServer: {
     static: "./dist",
     hot: true,
+    compress: true,
+    port: 9000,
   },
 };

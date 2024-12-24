@@ -1,18 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather App</title>
-</head>
-<body>
-    <div id="app">
-        <form id="search-form">
-            <input type="text" id="location-input" placeholder="Enter location">
-            <button type="submit">Get Weather</button>
-        </form>
-        <div id="loading-spinner" class="hidden"></div>
-        <div id="weather-display"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style/main.css" />
+  </head>
+  <body>
+    <div class="container padding-container">
+      <div id="search-bar"></div>
+      <div class="content">
+        <div id="header"></div>
+        <div id="weather">
+          <div id="current-card"></div>
+          <div id="forecast"></div>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>

@@ -1,24 +1,39 @@
-export interface WeatherDay {
-    datetime: string;
-    tempmax: number;
-    tempmin: number;
-    temp: number;
-    humidity: number;
-    conditions: string;
-    icon: string;
-    description: string;
-    windspeed: number;
-    sunrise: string;
-    sunset: string;
+export type currentWeather = {
+  datetime: string;
+  temp: number;
+  conditions: string;
+  subStates: currentSubStates;
+};
+
+type currentSubStates = {
+  feelslike: number;
+  humidity: number;
+  windspeed: number;
+  precip: number;
+  cloudcover: number;
+  sunrise: string;
+  sunset: string;
+  
 }
 
-export interface WeatherData {
-    resolvedAddress: string;
-    timezone: string;
-    days: WeatherDay[];
-}
+export type forecastWeather = {
+  datetime: string;
+  tempmax: number;
+  tempmin: number;
+  humidity: number;
+  windspeed: number;
+  conditions: string;
+  precip: number;
+};
 
-export enum TemperatureUnit {
-    Celsius = 'C',
-    Fahrenheit = 'F'
+export interface weatherState {
+  day: string;
+  time: string;
+  timeState: string;
+  weatherCondition: string;
+  current: currentWeather;
+  forecast: forecastWeather[];
+  resolveAddress: string;
+  timezone: string;
+  tzoffset: number;
 }

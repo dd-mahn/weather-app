@@ -1,0 +1,6 @@
+#search-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: clamp(300px, 50vw, 600px);
+}

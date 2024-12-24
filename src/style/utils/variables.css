@@ -1,0 +1,58 @@
+:root {
+  --text-light: #333333;
+  --text-dark: #ffffff;
+  --dusk: linear-gradient(
+    180deg,
+    rgba(94, 114, 112, 1) 16%,
+    rgba(187, 151, 120, 1) 78%,
+    rgba(221, 179, 143, 1) 99%
+  );
+  --morning: linear-gradient(
+    180deg,
+    rgba(255, 246, 248, 1) 0%,
+    rgba(250, 244, 251, 1) 54%,
+    rgba(206, 224, 244, 1) 100%
+  );
+  --dawn: linear-gradient(
+    180deg,
+    rgba(242, 145, 110, 1) 0%,
+    rgba(36, 46, 73, 1) 100%
+  );
+  --night: linear-gradient(
+    180deg,
+    rgba(39, 77, 96, 1) 0%,
+    rgba(10, 112, 117, 1) 100%
+  );
+  --heading-gradient: linear-gradient(
+    90deg,
+    rgba(51, 51, 51, 1) 0%,
+    rgba(129, 123, 123, 1) 100%
+  );
+  --heading-gradient-dark: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.8) 100%
+  );
+  --card-radial: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(91, 89, 89, 0.5) 66%,
+    rgba(255, 255, 255, 0.8) 100%
+  );
+  --small-card-radial: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(178, 178, 178, 1) 100%
+  );
+  --label-radial: radial-gradient(
+    circle,
+    rgba(70, 69, 69, 1) 0%,
+    rgba(206, 203, 203, 1) 48%,
+    rgba(207, 199, 199, 1) 100%
+  );
+  --label-radial-dark: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(184, 182, 182, 1) 100%
+  );
+}
