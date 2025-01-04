@@ -1,11 +1,13 @@
 export type currentWeather = {
   datetime: string;
   temp: number;
+  tempmin: number,
+  tempmax: number,
   conditions: string;
   subStates: currentSubStates;
 };
 
-type currentSubStates = {
+export type currentSubStates = {
   feelslike: number;
   humidity: number;
   windspeed: number;
@@ -17,7 +19,7 @@ type currentSubStates = {
 }
 
 export type forecastWeather = {
-  datetime: string;
+  date: string;
   tempmax: number;
   tempmin: number;
   humidity: number;
@@ -27,13 +29,13 @@ export type forecastWeather = {
 };
 
 export interface weatherState {
-  day: string;
+  day: string[];
   time: string;
   timeState: string;
   weatherCondition: string;
   current: currentWeather;
   forecast: forecastWeather[];
-  resolveAddress: string;
+  address: string;
   timezone: string;
   tzoffset: number;
 }

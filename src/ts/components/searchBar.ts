@@ -1,63 +1,141 @@
 import { getWeather } from "@/ts/api/getWeather";
-import { stringify } from "querystring";
+
+// Interface for storage operations
+interface StorageService {
+  save(key: string, value: string): void;
+  get(key: string): string | null;
+}
+
+// Local storage implementation
+class LocalStorageService implements StorageService {
+  save(key: string, value: string): void {
+    localStorage.setItem(key, value);
+  }
+
+  get(key: string): string | null {
+    return localStorage.getItem(key);
+  }
+}
+
+// Interface for event dispatching
+interface EventDispatcher {
+  dispatchDataChanged(data: string): void;
+  dispatchDataChanging(): void;
+}
+
+// Window event dispatcher implementation
+class WindowEventDispatcher implements EventDispatcher {
+  dispatchDataChanged(data: string): void {
+    const event = new CustomEvent("weatherDataChanged", { detail: data });
+    window.dispatchEvent(event);
+  }
+
+  dispatchDataChanging(): void {
+    const event = new CustomEvent("weatherDataChanging");
+    window.dispatchEvent(event);
+  }
+}
+
+// Interface for weather data fetching
+interface WeatherService {
+  fetchWeather(query: string): Promise<any>;
+}
+
+// Weather API implementation
+class WeatherAPIService implements WeatherService {
+  async fetchWeather(query: string): Promise<any> {
+    return await getWeather(query);
+  }
+}
 
 export class SearchBar {
   private container: HTMLElement;
   private input: HTMLInputElement;
   private button: HTMLButtonElement;
   private icon: HTMLSpanElement;
-  private dataKey: string;
-  private lastSearchKey: string = "lastSearch";
+  private readonly dataKey: string;
+  private readonly lastSearchKey: string = "lastSearch";
+  private readonly storageService: StorageService;
+  private readonly eventDispatcher: EventDispatcher;
+  private readonly weatherService: WeatherService;
 
-  constructor(containerId: string) {
+  constructor(
+    containerId: string,
+    storageService: StorageService = new LocalStorageService(),
+    eventDispatcher: EventDispatcher = new WindowEventDispatcher(),
+    weatherService: WeatherService = new WeatherAPIService()
+  ) {
     this.container = document.getElementById(containerId) as HTMLElement;
     this.input = document.createElement("input");
     this.button = document.createElement("button");
     this.icon = document.createElement("span");
     this.dataKey = process.env.LOCAL_STORAGE_KEY || "weatherData";
+    this.storageService = storageService;
+    this.eventDispatcher = eventDispatcher;
+    this.weatherService = weatherService;
 
     this.setup();
   }
 
-  private setup() {
+  private setup(): void {
+    this.setupInput();
+    this.setupButton();
+    this.setupIcon();
+    this.attachEventListeners();
+    this.render();
+  }
+
+  private setupInput(): void {
     this.input.type = "text";
     this.input.placeholder = "Enter location";
     this.input.value = this.getLastSearch() || "";
+  }
 
+  private setupButton(): void {
     this.button.appendChild(this.icon);
+  }
 
+  private setupIcon(): void {
     this.icon.classList.add("material-symbols-outlined");
     this.icon.textContent = "search";
+  }
 
+  private attachEventListeners(): void {
     this.button.addEventListener("click", () => this.onSearch());
+  }
 
+  private render(): void {
     this.container.appendChild(this.input);
     this.container.appendChild(this.button);
   }
 
-  private onSearch() {
+  private async onSearch(): Promise<void> {
     const query = this.input.value;
-    if (query) {
+    if (!query) return;
+
+    try {
+      this.eventDispatcher.dispatchDataChanging();
       this.saveLastSearch(query);
-      getWeather(query)
-        .then((data) => {
-          this.saveData(JSON.stringify(data));
-        })
-        .catch((error) => {
-          this.saveData("Error:" + error);
-        });
+      
+      const data = await this.weatherService.fetchWeather(query);
+      const stringifiedData = JSON.stringify(data);
+      
+      this.saveData(stringifiedData);
+      this.eventDispatcher.dispatchDataChanged(stringifiedData);
+    } catch (error) {
+      console.error("Error fetching weather data:", error);
     }
   }
 
-  private saveData(data: string) {
-    localStorage.setItem(this.dataKey, data);
+  private saveData(data: string): void {
+    this.storageService.save(this.dataKey, data);
   }
 
-  private getLastSearch() {
-    return localStorage.getItem(this.lastSearchKey);
+  private getLastSearch(): string | null {
+    return this.storageService.get(this.lastSearchKey);
   }
 
-  private saveLastSearch(query: string) {
-    localStorage.setItem(this.lastSearchKey, query);
+  private saveLastSearch(query: string): void {
+    this.storageService.save(this.lastSearchKey, query);
   }
 }

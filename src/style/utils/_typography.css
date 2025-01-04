@@ -87,3 +87,13 @@ p, a, span, button{
   font-family: var(--font-body);
   font-weight: var(--weight-medium);
 }
+
+h1{
+  font-family: "Dosis", serif;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+h2,h3,p,span,button,::placeholder{
+  font-family: "Lato", serif;
+}

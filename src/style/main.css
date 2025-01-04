@@ -6,7 +6,28 @@
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 
-.image {
+body{
+
+}
+
+img {
   width: clamp(150px, 101.4286px + 15.1786vw, 320px);
   height: clamp(150px, 101.4286px + 15.1786vw, 320px);
 }
+
+.bg-morning{
+  background: var(--morning)
+}
+
+.bg-dusk{
+  background: var(--dusk)
+}
+
+.bg-dawn{
+  background: var(--dawn)
+}
+
+.bg-night{
+  background: var(--night)
+}
+

@@ -10,8 +10,25 @@ export function formatDay(datetime: string) {
     "Friday",
     "Saturday",
   ];
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
   const date = new Date(`${dateArr[0]}-${dateArr[1]}-${dateArr[2]}`);
-  return days[date.getDay()];
+  return [
+    `${days[date.getDay()]}`,
+    `${months[date.getMonth()]} ${date.getDate()} ${date.getFullYear()}`,
+  ];
 }
 
 export function formatTime(datetime: string) {

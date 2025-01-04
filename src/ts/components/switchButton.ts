@@ -6,8 +6,11 @@ export class SwitchButton {
   private labelContainer: HTMLDivElement;
   private labels: HTMLSpanElement[];
 
+  // Define custom event name
+  private static readonly MODE_CHANGE_EVENT = "cfModeChanged";
+
   constructor(currentMode: string = "C") {
-    this.currentMode = "C";
+    this.currentMode = localStorage.getItem("mode") || "C";
     this.container = document.createElement("div");
     this.button = document.createElement("button");
     this.switch = document.createElement("div");
@@ -15,6 +18,7 @@ export class SwitchButton {
     this.labels = ["C", "F"].map((label) => {
       const span = document.createElement("span");
       span.textContent = label;
+      span.classList.add("switch__label");
       return span;
     });
 
@@ -24,25 +28,48 @@ export class SwitchButton {
   private setup() {
     this.button.addEventListener("click", () => this.onSwitch());
 
-    this.switch.classList.add("switch");
-    if (this.currentMode === "F") {
-      this.switch.classList.add("switch-F");
-    }
+    this.container.classList.add("switch");
     
-    this.labelContainer.classList.add("label-container");
+    this.switch.classList.add("switch__thumb");
+    if(this.currentMode === "F"){
+      this.switch.classList.add("switch__thumb--right")
+    }
 
-    this.labels.forEach((label) => this.labelContainer.appendChild(label));
+    this.labelContainer.classList.add("switch__labels");
+    this.button.classList.add("switch__button");
 
-    this.container.appendChild(this.labelContainer);
-    this.container.appendChild(this.button);
+    this.labels.forEach((label, index) => {
+      label.classList.add(index === 0 ? "switch__label--celsius" : "switch__label--fahrenheit");
+      if (this.currentMode === label.textContent) {
+        label.classList.add("switch__label--active");
+      }
+      this.labelContainer.appendChild(label);
+    });
 
     this.button.appendChild(this.switch);
+    this.container.appendChild(this.button);
+    this.container.appendChild(this.labelContainer);
   }
 
   private onSwitch() {
-    this.switch.classList.toggle("switch-F");
-    this.currentMode = this.currentMode === "C" ? "F" : "C";
-    localStorage.setItem("mode", this.currentMode);
+    const newMode = this.currentMode === "C" ? "F" : "C";
+    this.switch.classList.toggle("switch__thumb--right");
+    this.currentMode = newMode;
+
+    // Update active label styles
+    this.labels.forEach(label => {
+      label.classList.toggle("switch__label--active");
+    });
+
+    localStorage.setItem("mode", newMode);
+    this.dispatchModeChangeEvent(newMode);
+  }
+
+  private dispatchModeChangeEvent(mode: string) {
+    const event = new CustomEvent(SwitchButton.MODE_CHANGE_EVENT, {
+      detail: mode,
+    });
+    window.dispatchEvent(event);
   }
 
   public getElement(): HTMLElement {
