@@ -1,4 +1,5 @@
 import { weatherState } from "../types/weatherTypes";
+import "@/style/components/header.css"
 
 export class Header {
   private container: HTMLElement;
@@ -11,16 +12,16 @@ export class Header {
     this.container = document.getElementById(containerId) as HTMLElement;
 
     this.date = document.createElement("p");
-    this.date.classList.add("header__date");
+    this.date.classList.add("header__date", "text-xs");
 
     this.monthyear = document.createElement("p");
-    this.monthyear.classList.add("header__monthyear");
+    this.monthyear.classList.add("header__monthyear", "text-xs");
 
     this.time = document.createElement("h3");
-    this.time.classList.add("header__time");
+    this.time.classList.add("header__time", "text-m");
 
     this.city = document.createElement("h1");
-    this.city.classList.add("header__city");
+    this.city.classList.add("header__city", "text-h1");
 
     this.setupHeader(JSON.parse(weatherData));
   }

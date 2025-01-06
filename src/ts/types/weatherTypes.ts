@@ -24,6 +24,7 @@ export type forecastWeather = {
   tempmin: number;
   humidity: number;
   windspeed: number;
+  icon: string;
   conditions: string;
   precip: number;
 };

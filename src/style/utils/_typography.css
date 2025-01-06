@@ -43,13 +43,13 @@ p, a, span, button{
 .text-h3 {
   font-size: var(--size-h3);
   font-family: var(--font-heading);
-  font-weight: var(--weight-medium);
+  font-weight: var(--weight-regular);
 }
 
 .text-xs {
   font-size: var(--size-text-xs);
   font-family: var(--font-body);
-  font-weight: var(--weight-light);
+  font-weight: var(--weight-regular);
 }
 
 .text-s {
@@ -61,7 +61,7 @@ p, a, span, button{
 .text-m {
   font-size: var(--size-text-m);
   font-family: var(--font-body);
-  font-weight: var(--weight-regular);
+  font-weight: var(--weight-light);
 }
 
 .text-l {
@@ -85,15 +85,19 @@ p, a, span, button{
 .button-l {
   font-size: var(--size-button-l);
   font-family: var(--font-body);
-  font-weight: var(--weight-medium);
+  font-weight: var(--weight-regular);
 }
 
 h1{
   font-family: "Dosis", serif;
   font-weight: 800;
   text-transform: uppercase;
+  margin: 0;
+  line-height: 0.8;
 }
 
 h2,h3,p,span,button,::placeholder{
   font-family: "Lato", serif;
+  margin: 0;
+  line-height: 1.1;
 }

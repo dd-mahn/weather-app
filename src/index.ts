@@ -58,6 +58,10 @@ const updateUI = () => {
   const mode = localStorage.getItem("mode") || "C";
   const filteredData = getFullWeatherData(data, mode);
   const JSONdata = JSON.parse(filteredData);
+  console.log(JSONdata)
+
+  const container = document.getElementById("container")
+  container?.classList.add(JSONdata.timeState ? JSONdata.timeState : "morning")
 
   const imgContainerTablet = document.getElementById("img__container-tablet");
   const imgContainerDesktop = document.getElementById("img__container-desktop");

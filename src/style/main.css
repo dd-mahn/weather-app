@@ -7,27 +7,57 @@
 }
 
 body{
-
+  padding: 0;
+  margin: 0;
 }
 
 img {
-  width: clamp(150px, 101.4286px + 15.1786vw, 320px);
-  height: clamp(150px, 101.4286px + 15.1786vw, 320px);
+  width: clamp(100px, 37.1429px + 19.6429vw, 320px);
+  height: clamp(100px, 37.1429px + 19.6429vw, 320px);
 }
 
-.bg-morning{
+.morning{
   background: var(--morning)
 }
 
-.bg-dusk{
+.dusk{
   background: var(--dusk)
 }
 
-.bg-dawn{
+.dawn{
   background: var(--dawn)
 }
 
-.bg-night{
+.night{
   background: var(--night)
 }
+
+#container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#content{
+  width: 100%;
+}
+
+#content__top{
+  display: flex;
+  justify-content: center;
+}
+
+input, button{
+  border: none;
+  outline: none;
+  background: none;
+}
+
+button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
 

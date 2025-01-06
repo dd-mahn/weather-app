@@ -1,10 +1,51 @@
 #current{
-    border: 1px solid #000000;
     display: flex;
     flex-direction: row;
+    gap: 10px;
+    border-radius: 15px;
+    box-shadow: var(--card-shadow-dark);
+    background: var(--card-radial);
+    color: var(--text-dark);
+    padding: clamp(8px, 3.4286px + 1.4286vw, 24px) clamp(12px, 1.7143px + 3.2143vw, 48px);
 }
 
-#current :nth-child(1){
+.current-weather__mobile-left{
     display: flex;
-    
+    align-items: center;
+}
+
+.current-weather__mobile-right{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.current-weather__main{
+    display: flex;
+    justify-content: space-between;
+}
+
+.current-weather__substates{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 8px;
+}
+.current-weather__substate-item{
+    width: fit-content;
+}
+
+.current-weather__substate-label{
+    display: flex;
+    align-items: center;
+    gap: clamp(3px, 2.1429px + 0.2679vw, 6px);
+}
+
+.current-weather__substate-icon{
+    font-size: clamp(12px, 10.8571px + 0.3571vw, 16px);
+}
+
+.current-weather__substate-value{
+    padding: clamp(4px, 3.4286px + 0.1786vw, 6px) 0;
 }

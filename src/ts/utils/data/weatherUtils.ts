@@ -84,7 +84,8 @@ export function getForecastDays(
       tempmin: day.tempmin,
       humidity: day.humidity,
       windspeed: day.windspeed,
-      conditions: day.icon,
+      icon: day.icon,
+      conditions: day.conditions,
       precip: day.precip,
     };
     return convertTemperatures(processedDay, mode);

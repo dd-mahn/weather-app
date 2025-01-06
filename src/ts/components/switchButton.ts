@@ -1,3 +1,5 @@
+import "@/style/components/switch.css"
+
 export class SwitchButton {
   private currentMode: string;
   private container: HTMLElement;
@@ -18,7 +20,7 @@ export class SwitchButton {
     this.labels = ["C", "F"].map((label) => {
       const span = document.createElement("span");
       span.textContent = label;
-      span.classList.add("switch__label");
+      span.classList.add("switch__label", "button-l");
       return span;
     });
 
@@ -31,15 +33,16 @@ export class SwitchButton {
     this.container.classList.add("switch");
     
     this.switch.classList.add("switch__thumb");
-    if(this.currentMode === "F"){
-      this.switch.classList.add("switch__thumb--right")
-    }
-
+    
     this.labelContainer.classList.add("switch__labels");
     this.button.classList.add("switch__button");
+    if(this.currentMode === "F"){
+      this.button.classList.add("mode-f")
+    }else{
+      this.button.classList.remove("mode-f")
+    }
 
-    this.labels.forEach((label, index) => {
-      label.classList.add(index === 0 ? "switch__label--celsius" : "switch__label--fahrenheit");
+    this.labels.forEach((label) => {;
       if (this.currentMode === label.textContent) {
         label.classList.add("switch__label--active");
       }
@@ -47,8 +50,8 @@ export class SwitchButton {
     });
 
     this.button.appendChild(this.switch);
-    this.container.appendChild(this.button);
     this.container.appendChild(this.labelContainer);
+    this.container.appendChild(this.button);
   }
 
   private onSwitch() {

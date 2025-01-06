@@ -7,6 +7,7 @@ export class DayCard {
   private container: HTMLElement;
   private currentDay: HTMLSpanElement;
   private weatherIcon: HTMLElement;
+  private conditions: HTMLElement;
   private tempRange: HTMLSpanElement;
 
   private topSect: HTMLElement;
@@ -18,25 +19,29 @@ export class DayCard {
     this.container.classList.add("forecast-day");
 
     this.currentDay = document.createElement("span");
-    this.currentDay.classList.add("forecast-day__current")
-    this.currentDay.textContent = dayData.date[0].slice(0,3);
+    this.currentDay.classList.add("forecast-day__current");
+    this.currentDay.textContent = dayData.date[0].slice(0, 3);
 
     this.weatherIcon = document.createElement("span");
     this.weatherIcon.classList.add("material-symbols-outlined");
-    this.weatherIcon.classList.add("forecast-day__condition");
-    this.weatherIcon.textContent = `${iconSet[dayData.conditions]}`;
+    this.weatherIcon.classList.add("forecast-day__condition-icon");
+    this.weatherIcon.textContent = `${iconSet[dayData.icon]}`;
+
+    this.conditions = document.createElement("p");
+    this.conditions.textContent = dayData.conditions;
+    this.weatherIcon.classList.add("forecast-day__condition-text");
 
     this.tempRange = document.createElement("span");
-    this.tempRange.classList.add("forecast-day__temp")
+    this.tempRange.classList.add("forecast-day__temp");
 
     this.topSect = document.createElement("div");
-    this.topSect.classList.add("forecast-day__top")
+    this.topSect.classList.add("forecast-day__top");
 
     this.midSect = document.createElement("div");
-    this.midSect.classList.add("forecast-day__mid")
+    this.midSect.classList.add("forecast-day__mid");
 
     this.botSect = document.createElement("div");
-    this.botSect.classList.add("forecast-day__bot")
+    this.botSect.classList.add("forecast-day__bot");
 
     this.setupTopSect();
     this.setupMidSect(dayData);
@@ -48,8 +53,14 @@ export class DayCard {
     if (window.innerWidth < 768) {
       this.topSect.appendChild(this.currentDay);
     } else {
+      const subContainer = document.createElement("div");
+      subContainer.classList.add("forecast-day__condition-container");
+
+      subContainer.appendChild(this.weatherIcon);
+      subContainer.appendChild(this.conditions);
+
       this.topSect.appendChild(this.currentDay);
-      this.topSect.appendChild(this.weatherIcon);
+      this.topSect.appendChild(subContainer);
     }
   }
 
@@ -57,7 +68,7 @@ export class DayCard {
     const midSectStates = ["precip", "humidity", "windspeed"];
     function addStates(key: string, value: any) {
       const container = document.createElement("div");
-      container.classList.add("forecast-day__state")
+      container.classList.add("forecast-day__state");
 
       const label = document.createElement("span");
       const icon = document.createElement("span");

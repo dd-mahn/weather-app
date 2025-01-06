@@ -2,5 +2,32 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: clamp(300px, 50vw, 600px);
+  width: clamp(240px, 194.2857px + 14.2857vw, 400px);
+  padding: clamp(8px, 6.8571px + 0.3571vw, 12px)
+    clamp(12px, 10.8571px + 0.3571vw, 16px);
+  background: var(--bg-button-dark);
+  border-radius: 30px;
+  box-shadow: var(--shadow-button-dark);
 }
+
+#search-bar input {
+  width: 80%;
+  line-height: clamp(20px, 18.8571px + 0.3571vw, 24px);
+}
+
+#search-bar input::placeholder{
+  color: var(--placeholder);
+}
+
+#search-bar button {
+  background: var(--bg-button-dark);
+  border-radius: 30px;
+  padding: clamp(3px, 2.1429px + 0.2679vw, 6px)
+    clamp(10px, 9.4286px + 0.1786vw, 12px);
+}
+
+#search-bar button span {
+  font-size: clamp(16px, 12px + 1.25vw, 30px);
+}
+
+

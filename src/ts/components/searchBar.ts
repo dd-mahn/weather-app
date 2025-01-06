@@ -1,5 +1,5 @@
 import { getWeather } from "@/ts/api/getWeather";
-
+import "@/style/components/search.css"
 // Interface for storage operations
 interface StorageService {
   save(key: string, value: string): void;

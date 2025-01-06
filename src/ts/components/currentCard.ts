@@ -46,14 +46,14 @@ export class CurrentCard {
     this.mainState = document.createElement("div");
     this.mainState.classList.add("current-weather__main");
 
-    this.mainStateTemp = document.createElement("h2");
-    this.mainStateTemp.classList.add("current-weather__temp");
+    this.mainStateTemp = document.createElement("h3");
+    this.mainStateTemp.classList.add("current-weather__temp", "text-h3");
 
     this.mainStateTempRange = document.createElement("span");
-    this.mainStateTempRange.classList.add("current-weather__temp-range");
+    this.mainStateTempRange.classList.add("current-weather__temp-range", "text-l");
 
     this.mainStateDescription = document.createElement("p");
-    this.mainStateDescription.classList.add("current-weather__description");
+    this.mainStateDescription.classList.add("current-weather__description", "text-s");
 
     this.subStates = document.createElement("div");
     this.subStates.classList.add("current-weather__substates");
@@ -119,10 +119,10 @@ export class CurrentCard {
       itemIcon.classList.add("material-symbols-outlined", "current-weather__substate-icon");
 
       const itemName = document.createElement("p");
-      itemName.classList.add("current-weather__substate-name");
+      itemName.classList.add("current-weather__substate-name", "text-xs");
 
       const itemValue = document.createElement("p");
-      itemValue.classList.add("current-weather__substate-value");
+      itemValue.classList.add("current-weather__substate-value", `${window.innerWidth < 768 ? "text-s" : "text-m"}`);
 
       itemIcon.textContent = iconSet[key];
       itemLabel.appendChild(itemIcon);
