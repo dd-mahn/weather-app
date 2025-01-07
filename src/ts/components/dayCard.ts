@@ -19,7 +19,7 @@ export class DayCard {
     this.container.classList.add("forecast-day");
 
     this.currentDay = document.createElement("span");
-    this.currentDay.classList.add("forecast-day__current");
+    this.currentDay.classList.add("forecast-day__current", "text-s");
     this.currentDay.textContent = dayData.date[0].slice(0, 3);
 
     this.weatherIcon = document.createElement("span");
@@ -32,7 +32,7 @@ export class DayCard {
     this.weatherIcon.classList.add("forecast-day__condition-text");
 
     this.tempRange = document.createElement("span");
-    this.tempRange.classList.add("forecast-day__temp");
+    this.tempRange.classList.add("forecast-day__temp", "text-s");
 
     this.topSect = document.createElement("div");
     this.topSect.classList.add("forecast-day__top");

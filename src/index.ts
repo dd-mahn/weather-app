@@ -60,8 +60,11 @@ const updateUI = () => {
   const JSONdata = JSON.parse(filteredData);
   console.log(JSONdata)
 
-  const container = document.getElementById("container")
-  container?.classList.add(JSONdata.timeState ? JSONdata.timeState : "morning")
+  const body = document.querySelector("body")
+  // Remove any existing time classes first
+  body?.classList.remove("morning", "afternoon", "evening", "night");
+  // Add the new time class
+  body?.classList.add(JSONdata.timeState || "morning");
 
   const imgContainerTablet = document.getElementById("img__container-tablet");
   const imgContainerDesktop = document.getElementById("img__container-desktop");

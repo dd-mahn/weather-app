@@ -1,3 +1,16 @@
 .forecast-day{
-    border: 1px solid #333333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: clamp(0.5rem, 0.8214rem + -0.3571vw, 0.75rem) clamp(1rem, 1.1607rem + -0.1786vw, 1.125rem);
+    color: var(--text-dark);
+    background: var(--small-card-radial);
+    border-radius: 10px;
+    box-shadow: var(--card-shadow-dark);
+}
+
+.forecast-day__condition-icon{
+    font-size: 32px;
 }

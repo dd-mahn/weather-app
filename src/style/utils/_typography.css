@@ -7,7 +7,7 @@
   --weight-medium: 600;
   --weight-regular: 400;
   --weight-light: 300;
-  --size-h1: clamp(80px, 56px + 7.5vw, 164px);
+  --size-h1: clamp(3rem, 0.9286rem + 10.3571vw, 10.25rem);
   --size-h2: clamp(48px, 41.1429px + 2.1429vw, 72px);
   --size-text-xs: clamp(10px, 9.4286px + 0.1786vw, 12px);
   --size-text-s: clamp(14px, 12.8571px + 0.3571vw, 18px);

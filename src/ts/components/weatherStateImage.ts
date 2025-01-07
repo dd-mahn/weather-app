@@ -13,7 +13,20 @@ export class WeatherStateImage {
   }
 
   private setup(time: string) {
-    const images = time.includes("AM") ? dayImages : nightImages;
+    // Extract hour from time string (e.g. "10:00 AM" -> 10)
+    const hour = parseInt(time.split(':')[0]);
+    const period = time.includes('AM') ? 'AM' : 'PM';
+    
+    // Convert to 24 hour format
+    let hour24 = hour;
+    if (period === 'PM' && hour !== 12) {
+      hour24 += 12;
+    } else if (period === 'AM' && hour === 12) {
+      hour24 = 0;
+    }
+
+    // Use day images from 5AM to 5PM (5-17), night images otherwise
+    const images = (hour24 >= 5 && hour24 < 17) ? dayImages : nightImages;
 
     const weatherImage = images[this.weatherCondition];
     if (!weatherImage) {

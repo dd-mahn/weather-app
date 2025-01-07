@@ -43,9 +43,9 @@
     rgba(255, 255, 255, 0.26) 100%
   );
   --small-card-radial: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.8) 0%,
-    rgba(178, 178, 178, 1) 100%
+    517.26% 134.36% at 15.97% 9.5%,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(178, 178, 178, 0.1) 100%
   );
 
   --label-radial: radial-gradient(

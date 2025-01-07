@@ -1,12 +1,12 @@
 #current{
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 12px;
     border-radius: 15px;
     box-shadow: var(--card-shadow-dark);
     background: var(--card-radial);
     color: var(--text-dark);
-    padding: clamp(8px, 3.4286px + 1.4286vw, 24px) clamp(12px, 1.7143px + 3.2143vw, 48px);
+    padding: clamp(16px, 13.7143px + 0.7143vw, 24px) clamp(12px, 1.7143px + 3.2143vw, 48px);
 }
 
 .current-weather__mobile-left{
@@ -18,7 +18,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 16px;
 }
 
 .current-weather__main{

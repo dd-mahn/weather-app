@@ -1,6 +1,24 @@
-#forecast{
+#forecast {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
     gap: 12px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
+    padding-bottom: 16px;
+}
+
+#forecast::-webkit-scrollbar {
+    height: 2px;
+}
+
+#forecast::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#forecast::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
 }

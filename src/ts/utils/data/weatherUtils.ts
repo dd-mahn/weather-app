@@ -53,14 +53,14 @@ export function getCurrentWeather(
   const processedWeather = {
     datetime: currentWeather.datetime,
     temp: currentWeather.temp,
-    tempmin: dayWeather.tempmin,
-    tempmax: dayWeather.tempmax,
+    tempmin: Math.round(dayWeather.tempmin),
+    tempmax: Math.round(dayWeather.tempmax),
     conditions: currentWeather.conditions,
     subStates: {
       feelslike: currentWeather.feelslike,
       humidity: currentWeather.humidity,
       windspeed: currentWeather.windspeed,
-      precip: currentWeather.precip,
+      precip: currentWeather.precip  === null ? 0 : currentWeather.precip,
       cloudcover: currentWeather.cloudcover,
       sunrise: formatTime(currentWeather.sunrise),
       sunset: formatTime(currentWeather.sunset),
@@ -80,13 +80,13 @@ export function getForecastDays(
   return forecast.map((day: any) => {
     const processedDay = {
       date: formatDay(day.datetime),
-      tempmax: day.tempmax,
-      tempmin: day.tempmin,
+      tempmax: Math.round(day.tempmax),
+      tempmin: Math.round(day.tempmin),
       humidity: day.humidity,
       windspeed: day.windspeed,
       icon: day.icon,
       conditions: day.conditions,
-      precip: day.precip,
+      precip: day.precip === null ? 0 : day.precip,
     };
     return convertTemperatures(processedDay, mode);
   });
