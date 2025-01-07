@@ -13,10 +13,17 @@
 #search-bar input {
   width: 80%;
   line-height: clamp(20px, 18.8571px + 0.3571vw, 24px);
+  color: var(--text-dark);
+  font-size: var(--size-text-s);
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
 }
 
-#search-bar input::placeholder{
+#search-bar input::placeholder {
   color: var(--placeholder);
+  font-size: var(--size-text-s);
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
 }
 
 #search-bar button {
@@ -30,4 +37,12 @@
   font-size: clamp(16px, 12px + 1.25vw, 30px);
 }
 
+@media screen and (min-width: 768px) {
+  #search-bar button {
+    background: transparent;
+  }
 
+  #search-bar button span {
+    color: var(--text-dark);
+  }
+}

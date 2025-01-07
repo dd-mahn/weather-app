@@ -49,3 +49,43 @@
 .current-weather__substate-value{
     padding: clamp(4px, 3.4286px + 0.1786vw, 6px) 0;
 }
+
+@media screen and (min-width: 768px) {
+    #current{
+        flex-direction: column;
+        gap: 28px;
+    }
+
+    .current-weather__content{
+        display: flex;
+        gap: 12px;
+    }
+
+    .current-weather__content-left{
+        border-right: 1px solid #ffffffcc;
+        padding-right: 12px;
+    }
+
+    .current-weather__content-right{
+        display: flex;
+        align-items: end;
+    }
+
+    .current-weather__substates{
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        row-gap: 16px;
+        column-gap:24px;
+    }
+
+    .current-weather__substate-item{
+        width: 100%;
+    }
+
+    .current-weather__substate-label{
+        background: var(--label-gradient-dark);
+        justify-content: center;
+        width: 100%;
+        border-radius: 5px;
+        padding: 2px 0;
+    }
+}

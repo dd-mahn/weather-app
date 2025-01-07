@@ -19,7 +19,7 @@ export class DayCard {
     this.container.classList.add("forecast-day");
 
     this.currentDay = document.createElement("span");
-    this.currentDay.classList.add("forecast-day__current", "text-s");
+    this.currentDay.classList.add("forecast-day__current", window.innerWidth < 768 ? "text-s" : "button-l");
     this.currentDay.textContent = dayData.date[0].slice(0, 3);
 
     this.weatherIcon = document.createElement("span");
@@ -28,11 +28,14 @@ export class DayCard {
     this.weatherIcon.textContent = `${iconSet[dayData.icon]}`;
 
     this.conditions = document.createElement("p");
-    this.conditions.textContent = dayData.conditions;
+    this.conditions.textContent = dayData.conditions
+      .split(",")[0]
+      .replace("Partially ", "")
+      .replace("cloudy", "Cloudy");
     this.weatherIcon.classList.add("forecast-day__condition-text");
 
     this.tempRange = document.createElement("span");
-    this.tempRange.classList.add("forecast-day__temp", "text-s");
+    this.tempRange.classList.add("forecast-day__temp", window.innerWidth < 768 ? "text-s" : "button-m");
 
     this.topSect = document.createElement("div");
     this.topSect.classList.add("forecast-day__top");
@@ -87,7 +90,9 @@ export class DayCard {
       valueText.textContent = value + unit[key];
 
       container.appendChild(icon);
-      container.appendChild(label);
+
+      if (window.innerWidth >= 1024) container.appendChild(label);
+
       container.appendChild(valueText);
 
       return container;
@@ -95,14 +100,12 @@ export class DayCard {
 
     if (window.innerWidth < 768) {
       this.midSect.appendChild(this.weatherIcon);
-    } else if (window.innerWidth > 768 && window.innerWidth < 1024) {
-      Object.entries(dayData)
-        .slice(0, 2)
-        .forEach(([key, value]) => {
-          if (midSectStates.includes(key)) {
-            this.midSect.appendChild(addStates(key, value));
-          }
-        });
+    } else if (window.innerWidth >= 768 && window.innerWidth < 1024) {
+      Object.entries(dayData).forEach(([key, value]) => {
+        if (midSectStates.slice(0, 2).includes(key)) {
+          this.midSect.appendChild(addStates(key, value));
+        }
+      });
     } else {
       Object.entries(dayData).forEach(([key, value]) => {
         if (midSectStates.includes(key)) {

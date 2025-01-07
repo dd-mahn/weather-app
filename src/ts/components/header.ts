@@ -1,5 +1,5 @@
 import { weatherState } from "../types/weatherTypes";
-import "@/style/components/header.css"
+import "@/style/components/header.css";
 
 export class Header {
   private container: HTMLElement;
@@ -12,13 +12,22 @@ export class Header {
     this.container = document.getElementById(containerId) as HTMLElement;
 
     this.date = document.createElement("p");
-    this.date.classList.add("header__date", "text-xs");
+    this.date.classList.add(
+      "header__date",
+      window.innerWidth < 768 ? "text-xs" : "text-s"
+    );
 
     this.monthyear = document.createElement("p");
-    this.monthyear.classList.add("header__monthyear", "text-xs");
+    this.monthyear.classList.add(
+      "header__monthyear",
+      window.innerWidth < 768 ? "text-xs" : "text-s"
+    );
 
     this.time = document.createElement("h3");
-    this.time.classList.add("header__time", "text-m");
+    this.time.classList.add(
+      "header__time",
+      window.innerWidth < 768 ? "text-m" : "text-h3"
+    );
 
     this.city = document.createElement("h1");
     this.city.classList.add("header__city", "text-h1");

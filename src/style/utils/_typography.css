@@ -7,12 +7,13 @@
   --weight-medium: 600;
   --weight-regular: 400;
   --weight-light: 300;
-  --size-h1: clamp(3rem, 0.9286rem + 10.3571vw, 10.25rem);
+  --size-h1: clamp(48px, 25.1429px + 7.1429vw, 128px);
   --size-h2: clamp(48px, 41.1429px + 2.1429vw, 72px);
+  --size-h3: clamp(36px, 30.2857px + 1.7857vw, 56px);
   --size-text-xs: clamp(10px, 9.4286px + 0.1786vw, 12px);
   --size-text-s: clamp(14px, 12.8571px + 0.3571vw, 18px);
   --size-text-m: clamp(28px, 25.7143px + 0.7143vw, 36px);
-  --size-h3: clamp(40px, 37.7143px + 0.7143vw, 48px);
+  --size-text-l: clamp(32px, 27.4286px + 1.4286vw, 48px);
   --size-button-s: clamp(14px, 13.4286px + 0.1786vw, 16px);
   --size-button-m: clamp(17px, 16.1429px + 0.2679vw, 20px);
   --size-button-l: clamp(20px, 16.5714px + 1.0714vw, 32px);
@@ -65,9 +66,9 @@ p, a, span, button{
 }
 
 .text-l {
-  font-size: var(--size-h3);
+  font-size: var(--size-text-l);
   font-family: var(--font-heading);
-  font-weight: var(--weight-regular);
+  font-weight: var(--weight-light);
 }
 
 .button-s {
@@ -79,7 +80,7 @@ p, a, span, button{
 .button-m {
   font-size: var(--size-button-m);
   font-family: var(--font-body);
-  font-weight: var(--weight-medium);
+  font-weight: var(--weight-regular);
 }
 
 .button-l {

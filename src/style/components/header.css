@@ -28,3 +28,9 @@
     -webkit-background-clip: text;
     text-align: center;
 }
+
+@media screen and (min-width: 768px){
+    .header__sub-2{
+        width: 100%;
+    }
+}

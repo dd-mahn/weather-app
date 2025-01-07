@@ -63,5 +63,11 @@ button{
   justify-content: center;
 }
 
+@media screen and (min-width: 768px) and (max-width: 1024px){
+  #content__top{
+    justify-content: space-between;
+  }
+}
+
 
 
