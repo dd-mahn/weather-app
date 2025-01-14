@@ -21,6 +21,7 @@ class LocalStorageService implements StorageService {
 interface EventDispatcher {
   dispatchDataChanged(data: string): void;
   dispatchDataChanging(): void;
+  dispatchError(error: string): void;
 }
 
 // Window event dispatcher implementation
@@ -32,6 +33,11 @@ class WindowEventDispatcher implements EventDispatcher {
 
   dispatchDataChanging(): void {
     const event = new CustomEvent("weatherDataChanging");
+    window.dispatchEvent(event);
+  }
+
+  dispatchError(error: string): void {
+    const event = new CustomEvent("weatherError", { detail: error });
     window.dispatchEvent(event);
   }
 }
@@ -58,6 +64,7 @@ export class SearchBar {
   private readonly storageService: StorageService;
   private readonly eventDispatcher: EventDispatcher;
   private readonly weatherService: WeatherService;
+  private isSearching: boolean = false;
 
   constructor(
     containerId: string,
@@ -101,7 +108,17 @@ export class SearchBar {
   }
 
   private attachEventListeners(): void {
-    this.button.addEventListener("click", () => this.onSearch());
+    this.button.addEventListener("click", () => {
+      if (!this.isSearching) {
+        this.onSearch();
+      }
+    });
+
+    this.input.addEventListener("keypress", (event) => {
+      if (event.key === "Enter" && !this.isSearching) {
+        this.onSearch();
+      }
+    });
   }
 
   private render(): void {
@@ -114,16 +131,24 @@ export class SearchBar {
     if (!query) return;
 
     try {
+      this.isSearching = true;
       this.eventDispatcher.dispatchDataChanging();
       this.saveLastSearch(query);
       
       const data = await this.weatherService.fetchWeather(query);
-      const stringifiedData = JSON.stringify(data);
       
+      if (data.error) {
+        throw new Error(data.error.message || "City not found");
+      }
+      
+      const stringifiedData = JSON.stringify(data);
       this.saveData(stringifiedData);
       this.eventDispatcher.dispatchDataChanged(stringifiedData);
     } catch (error) {
       console.error("Error fetching weather data:", error);
+      this.eventDispatcher.dispatchError(error instanceof Error ? error.message : "Failed to fetch weather data");
+    } finally {
+      this.isSearching = false;
     }
   }
 

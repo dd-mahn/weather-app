@@ -20,7 +20,7 @@
 }
 
 #search-bar input::placeholder {
-  color: var(--placeholder);
+  color: var(--placeholder-dark);
   font-size: var(--size-text-s);
   font-family: var(--font-body);
   font-weight: var(--weight-regular);
@@ -35,6 +35,7 @@
 
 #search-bar button span {
   font-size: clamp(16px, 12px + 1.25vw, 30px);
+  color: var(--text-dark);
 }
 
 @media screen and (min-width: 768px) {
@@ -44,5 +45,28 @@
 
   #search-bar button span {
     color: var(--text-dark);
+  }
+}
+
+body.morning {
+  #search-bar {
+    background: var(--bg-button);
+    box-shadow: var(--shadow-button);
+  }
+
+  #search-bar input {
+    color: var(--text-light);
+  }
+
+  #search-bar input::placeholder {
+    color: var(--placeholder-light);
+  }
+
+  #search-bar button {
+    background: var(--bg-button);
+  }
+
+  #search-bar button span {
+    color: var(--text-light);
   }
 }

@@ -1,0 +1,17 @@
+.loading-state{
+    width: 100%;
+    min-height: 60svh ;
+    display: grid;
+    place-items: center;
+}
+
+.loading-state__content{
+    color: var(--text-dark);
+    font-size: var(--size-text-m);
+}
+
+body.morning{
+    .loading-state__content{
+        color: var(--text-light);
+    }
+}

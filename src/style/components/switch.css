@@ -6,6 +6,7 @@
 .switch__labels{
     display: flex;
     flex-direction: column;
+    gap: clamp(2px, 0.2857px + 0.5357vw, 8px);
 }
 
 .switch__label{
@@ -37,4 +38,15 @@
     height: clamp(20px, 15.4286px + 1.4286vw, 36px);
     background: var(--bg-button-dark);
     border-radius: 30px;
+}
+
+body.morning{
+    .switch__button{
+        background: var(--bg-button) !important;
+        box-shadow: var(--shadow-button);
+    }
+
+    .switch__thumb{
+        background: #3333337a;
+    }
 }

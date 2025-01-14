@@ -1,91 +1,114 @@
-#current{
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-    border-radius: 15px;
-    box-shadow: var(--card-shadow-dark);
-    background: var(--card-radial);
-    color: var(--text-dark);
-    padding: clamp(16px, 13.7143px + 0.7143vw, 24px) clamp(12px, 1.7143px + 3.2143vw, 48px);
+#current {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  border-radius: 15px;
+  box-shadow: var(--card-shadow-dark);
+  background: var(--card-radial);
+  color: var(--text-dark);
+  padding: clamp(16px, 13.7143px + 0.7143vw, 24px)
+    clamp(12px, 1.7143px + 3.2143vw, 48px);
 }
 
-.current-weather__mobile-left{
-    display: flex;
-    align-items: center;
+.current-weather__mobile-left {
+  display: flex;
+  align-items: center;
 }
 
-.current-weather__mobile-right{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+.current-weather__mobile-right {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.current-weather__main{
-    display: flex;
-    justify-content: space-between;
+.current-weather__main {
+  display: flex;
+  justify-content: space-between;
 }
 
-.current-weather__substates{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 8px;
+.current-weather__substates {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 8px;
 }
-.current-weather__substate-item{
-    width: fit-content;
-}
-
-.current-weather__substate-label{
-    display: flex;
-    align-items: center;
-    gap: clamp(3px, 2.1429px + 0.2679vw, 6px);
+.current-weather__substate-item {
+  width: fit-content;
 }
 
-.current-weather__substate-icon{
-    font-size: clamp(12px, 10.8571px + 0.3571vw, 16px);
+.current-weather__substate-label {
+  display: flex;
+  align-items: center;
+  gap: clamp(3px, 2.1429px + 0.2679vw, 6px);
 }
 
-.current-weather__substate-value{
-    padding: clamp(4px, 3.4286px + 0.1786vw, 6px) 0;
+.current-weather__substate-icon {
+  font-size: clamp(12px, 10.8571px + 0.3571vw, 16px);
+}
+
+.current-weather__substate-value {
+  padding: clamp(4px, 3.4286px + 0.1786vw, 6px) 0;
 }
 
 @media screen and (min-width: 768px) {
-    #current{
-        flex-direction: column;
-        gap: 28px;
-    }
+  #current {
+    flex-direction: column;
+    gap: 28px;
+  }
 
-    .current-weather__content{
-        display: flex;
-        gap: 12px;
-    }
+  .current-weather__content {
+    display: flex;
+    gap: 12px;
+  }
 
-    .current-weather__content-left{
-        border-right: 1px solid #ffffffcc;
-        padding-right: 12px;
-    }
+  .current-weather__content-left {
+    border-right: 1px solid #ffffffcc;
+    padding-right: 12px;
+  }
 
-    .current-weather__content-right{
-        display: flex;
-        align-items: end;
-    }
+  .current-weather__content-right {
+    display: flex;
+    align-items: end;
+  }
 
-    .current-weather__substates{
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        row-gap: 16px;
-        column-gap:24px;
-    }
+  .current-weather__substates {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 16px;
+    column-gap: 24px;
+  }
 
-    .current-weather__substate-item{
-        width: 100%;
-    }
+  .current-weather__substate-item {
+    width: 100%;
+  }
 
-    .current-weather__substate-label{
-        background: var(--label-gradient-dark);
-        justify-content: center;
-        width: 100%;
-        border-radius: 5px;
-        padding: 2px 0;
-    }
+  .current-weather__substate-label {
+    background: var(--label-gradient-dark);
+    justify-content: center;
+    width: 100%;
+    border-radius: 5px;
+    padding: 2px 0;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  #current {
+    width: 100%;
+  }
+}
+
+body.morning {
+  #current {
+    box-shadow: var(--card-shadow);
+    background: var(--card-radial);
+    color: var(--text-light);
+  }
+
+  .current-weather__content-left{
+    border-right: 1px solid #33333375;
+  }
+
+  .current-weather__substate-label{
+    background: var(--label-gradient)
+  }
 }

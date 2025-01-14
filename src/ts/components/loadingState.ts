@@ -1,3 +1,5 @@
+import "@/style/components/loading.css"
+
 export class LoadingState{
     private container: HTMLElement
     private loadingState: HTMLElement

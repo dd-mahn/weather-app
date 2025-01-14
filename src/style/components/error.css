@@ -1,0 +1,29 @@
+.error__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50svh;
+  gap: clamp(16px, 13.7143px + 0.7143vw, 24px);
+  color: var(--text-dark);
+}
+
+.error__heading {
+  background: var(--heading-gradient-dark);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  text-align: center;
+}
+
+body.morning {
+  .error__container {
+    color: var(--text-light);
+  }
+
+  .error__heading {
+    background: var(--heading-gradient);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    text-align: center;
+  }
+}
