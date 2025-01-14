@@ -12,7 +12,7 @@ export class ErrorState {
     this.errorHeading.classList.add("error__heading", "text-h1");
 
     this.errorText = document.createElement("h3");
-    this.errorText.classList.add("error__text", "text-h3");
+    this.errorText.classList.add("error__text", window.innerWidth < 768 ? "button-s" : "button-l");
 
     this.setUpError(errorMessage);
   }

@@ -82,6 +82,7 @@ export class SearchBar {
     this.weatherService = weatherService;
 
     this.setup();
+    this.initializeDefaultSearch();
   }
 
   private setup(): void {
@@ -95,7 +96,7 @@ export class SearchBar {
   private setupInput(): void {
     this.input.type = "text";
     this.input.placeholder = "Enter location";
-    this.input.value = this.getLastSearch() || "";
+    this.input.value = this.getLastSearch() || "Hanoi";
   }
 
   private setupButton(): void {
@@ -124,6 +125,14 @@ export class SearchBar {
   private render(): void {
     this.container.appendChild(this.input);
     this.container.appendChild(this.button);
+  }
+
+  private async initializeDefaultSearch(): Promise<void> {
+    const lastSearch = this.getLastSearch();
+    if (!lastSearch) {
+      this.input.value = "Hanoi";
+      await this.onSearch();
+    }
   }
 
   private async onSearch(): Promise<void> {

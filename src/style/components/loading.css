@@ -8,6 +8,7 @@
 .loading-state__content{
     color: var(--text-dark);
     font-size: var(--size-text-m);
+    animation: rotate 3s ease-in-out infinite;
 }
 
 body.morning{

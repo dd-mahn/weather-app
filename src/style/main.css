@@ -1,6 +1,7 @@
 @import './utils/_typography.css';
 @import './utils/_layout.css';
 @import './utils/variables.css';
+@import './utils/_animation.css';
 
 .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
@@ -52,11 +53,6 @@ img {
   justify-content: center;
 }
 
-#content__mid{
-  display: flex;
-  justify-content: space-between;
-  gap: 24px;
-}
 
 input, button{
   border: none;
@@ -80,6 +76,13 @@ button{
   #content{
     gap: 36px;
   }
+
+  #content__mid{
+    display: flex;
+    justify-content: space-between;
+    gap: 48px;
+  }
+  
 }
 
 

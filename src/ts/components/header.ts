@@ -2,62 +2,59 @@ import { weatherState } from "../types/weatherTypes";
 import "@/style/components/header.css";
 
 export class Header {
-  private container: HTMLElement;
-  private date: HTMLElement;
-  private monthyear: HTMLElement;
-  private time: HTMLElement;
-  private city: HTMLElement;
+  private readonly elements: {
+    container: HTMLElement;
+    date: HTMLParagraphElement;
+    monthyear: HTMLParagraphElement; 
+    time: HTMLHeadingElement;
+    city: HTMLHeadingElement;
+  };
 
   constructor(weatherData: string, containerId: string) {
-    this.container = document.getElementById(containerId) as HTMLElement;
+    const isMobile = window.innerWidth < 768;
+    const data = JSON.parse(weatherData) as weatherState;
 
-    this.date = document.createElement("p");
-    this.date.classList.add(
-      "header__date",
-      window.innerWidth < 768 ? "text-xs" : "text-s"
-    );
+    this.elements = {
+      container: document.getElementById(containerId) as HTMLElement,
+      date: this.createTextElement('p', ['header__date', isMobile ? 'text-xs' : 'text-s'], data.day[0]),
+      monthyear: this.createTextElement('p', ['header__monthyear', isMobile ? 'text-xs' : 'text-s'], data.day[1]),
+      time: this.createTextElement('h3', ['header__time', isMobile ? 'text-m' : 'text-h3'], data.time),
+      city: this.createTextElement('h1', ['header__city', 'text-h1'], data.address)
+    };
 
-    this.monthyear = document.createElement("p");
-    this.monthyear.classList.add(
-      "header__monthyear",
-      window.innerWidth < 768 ? "text-xs" : "text-s"
-    );
-
-    this.time = document.createElement("h3");
-    this.time.classList.add(
-      "header__time",
-      window.innerWidth < 768 ? "text-m" : "text-h3"
-    );
-
-    this.city = document.createElement("h1");
-    this.city.classList.add("header__city", "text-h1");
-
-    this.setupHeader(JSON.parse(weatherData));
+    this.render();
   }
 
-  private setupHeader(data: weatherState) {
-    this.date.textContent = data.day[0];
-    this.monthyear.textContent = data.day[1];
-    this.time.textContent = data.time;
-    this.city.textContent = data.address;
+  private createTextElement<K extends keyof HTMLElementTagNameMap>(
+    tag: K, 
+    classes: string[], 
+    text: string
+  ): HTMLElementTagNameMap[K] {
+    const element = document.createElement(tag);
+    element.classList.add(...classes);
+    element.textContent = text;
+    return element;
+  }
 
-    const subContainer1 = document.createElement("div");
-    subContainer1.classList.add("header__sub-1");
+  private createContainer(className: string, children: HTMLElement[]): HTMLDivElement {
+    const container = document.createElement('div');
+    container.classList.add(className);
+    children.forEach(child => container.appendChild(child));
+    return container;
+  }
 
-    const subContainer2 = document.createElement("div");
-    subContainer2.classList.add("header__sub-2");
+  private render(): void {
+    const { container, date, monthyear, time, city } = this.elements;
 
-    subContainer1.appendChild(this.date);
-    subContainer1.appendChild(this.monthyear);
-    subContainer2.appendChild(subContainer1);
-    subContainer2.appendChild(this.time);
+    const dateContainer = this.createContainer('header__sub-1', [date, monthyear]);
+    const timeContainer = this.createContainer('header__sub-2', [dateContainer, time]);
 
+    container.innerHTML = '';
+    
     if (window.innerWidth < 1024) {
-      this.container.appendChild(subContainer2);
-      this.container.appendChild(this.city);
+      container.append(timeContainer, city);
     } else {
-      this.container.appendChild(this.city);
-      this.container.appendChild(subContainer2);
+      container.append(city, timeContainer);
     }
   }
 }

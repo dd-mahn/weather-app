@@ -3,30 +3,19 @@ import { SwitchButton } from "@/ts/components/switchButton";
 import { WeatherStateImage } from "@/ts/components/weatherStateImage";
 import { iconSet } from "@/ts/utils/ui/icons";
 import { labelSet } from "@/ts/utils/ui/labels";
-import "@/style/components/current.css";
 import { unit } from "@/ts/utils/ui/unit";
+import "@/style/components/current.css";
 
 export class CurrentCard {
-  private container: HTMLElement;
-
-  private mobileLeftContainer: HTMLElement;
-  private mobileRightContainer: HTMLElement;
-
-  private switchButton: SwitchButton;
-
-  private mainState: HTMLElement;
-  private mainStateTemp: HTMLHeadingElement;
-  private mainStateTempRange: HTMLSpanElement;
-  private mainStateDescription: HTMLParagraphElement;
-
-  private weatherImage: WeatherStateImage;
-
-  private subStates: HTMLElement;
+  private readonly container: HTMLElement;
+  private readonly weatherImage: WeatherStateImage;
+  private readonly switchButton: SwitchButton;
+  private readonly mainState: HTMLElement;
+  private readonly subStates: HTMLElement;
 
   constructor(data: string, containerId: string) {
     const weatherData: weatherState = JSON.parse(data);
-    const currentMode = localStorage.getItem("mode") || "C";
-
+    
     this.container = document.getElementById(containerId) as HTMLElement;
     this.container.classList.add("current-weather");
 
@@ -35,130 +24,112 @@ export class CurrentCard {
       weatherData.time
     );
 
-    this.switchButton = new SwitchButton(currentMode);
+    this.switchButton = new SwitchButton();
+    this.mainState = this.createMainState(weatherData);
+    this.subStates = this.createSubStates(weatherData);
 
-    this.mobileLeftContainer = document.createElement("div");
-    this.mobileLeftContainer.classList.add("current-weather__mobile-left");
-
-    this.mobileRightContainer = document.createElement("div");
-    this.mobileRightContainer.classList.add("current-weather__mobile-right");
-
-    this.mainState = document.createElement("div");
-    this.mainState.classList.add("current-weather__main");
-
-    this.mainStateTemp = document.createElement("h3");
-    this.mainStateTemp.classList.add("current-weather__temp", "text-h3");
-
-    this.mainStateTempRange = document.createElement("span");
-    this.mainStateTempRange.classList.add("current-weather__temp-range", "text-l");
-
-    this.mainStateDescription = document.createElement("p");
-    this.mainStateDescription.classList.add("current-weather__description", "text-s");
-
-    this.subStates = document.createElement("div");
-    this.subStates.classList.add("current-weather__substates");
-
-    this.setupMainState(weatherData);
-    this.setupSubStates(weatherData);
     this.render();
   }
 
-  private setupMainState(weatherData: weatherState) {
+  private createMainState(weatherData: weatherState): HTMLElement {
+    const mainState = document.createElement("div");
+    mainState.classList.add("current-weather__main");
+
     const contentContainer = document.createElement("div");
     contentContainer.classList.add("current-weather__content");
 
-    this.mainStateTemp.textContent = `${weatherData.current.temp}°`;
-    this.mainStateDescription.textContent = weatherData.current.conditions;
+    const temp = document.createElement("h3");
+    temp.classList.add("current-weather__temp", "text-h3");
+    temp.textContent = `${weatherData.current.temp}°`;
 
-    this.mainStateTempRange.textContent = `${weatherData.current.tempmin}°/${weatherData.current.tempmax}°`;
+    const description = document.createElement("p");
+    description.classList.add("current-weather__description", "text-s");
+    description.textContent = weatherData.current.conditions;
+
+    const tempRange = document.createElement("span");
+    tempRange.classList.add("current-weather__temp-range", "text-l");
+    tempRange.textContent = `${weatherData.current.tempmin}°/${weatherData.current.tempmax}°`;
 
     if (window.innerWidth < 768) {
-      contentContainer.appendChild(this.mainStateTemp);
-      contentContainer.appendChild(this.mainStateDescription);
+      contentContainer.append(temp, description);
     } else {
-      const subLeftContainer = document.createElement("div");
-      subLeftContainer.classList.add("current-weather__content-left");
+      const leftContainer = document.createElement("div");
+      leftContainer.classList.add("current-weather__content-left");
+      leftContainer.append(temp, description);
 
-      const subRightContainer = document.createElement("div");
-      subRightContainer.classList.add("current-weather__content-right");
+      const rightContainer = document.createElement("div");
+      rightContainer.classList.add("current-weather__content-right");
+      rightContainer.appendChild(tempRange);
 
-      subLeftContainer.appendChild(this.mainStateTemp)
-      subLeftContainer.appendChild(this.mainStateDescription)
-
-      subRightContainer.appendChild(this.mainStateTempRange)
-
-      contentContainer.appendChild(subLeftContainer)
-      contentContainer.appendChild(subRightContainer)
+      contentContainer.append(leftContainer, rightContainer);
     }
 
-    this.mainState.appendChild(contentContainer);
-    this.mainState.appendChild(this.switchButton.getElement());
+    mainState.append(contentContainer, this.switchButton.getElement());
+    return mainState;
   }
 
-  private setupSubStates(weatherData: weatherState) {
-    const mobileSubstates = ["feelslike", "humidity", "windspeed", "precip"];
-    const subStatesData = weatherData.current.subStates;
-    const subStatesItems =
-      window.innerWidth < 768
-        ? mobileSubstates.map((key) => {
-            const value = subStatesData[key as keyof currentSubStates];
-            return createSubStateItem(key, value);
-          })
-        : Object.entries(subStatesData).map(([key, value]) => {
-            return createSubStateItem(key, value);
-          });
+  private createSubStates(weatherData: weatherState): HTMLElement {
+    const subStates = document.createElement("div");
+    subStates.classList.add("current-weather__substates");
 
-    function createSubStateItem(key: string, value: string | number) {
-      const itemContainer = document.createElement("div");
-      itemContainer.classList.add("current-weather__substate-item");
+    const keys = window.innerWidth < 768 
+      ? ["feelslike", "humidity", "windspeed", "precip"]
+      : Object.keys(weatherData.current.subStates);
 
-      const itemLabel = document.createElement("div");
-      itemLabel.classList.add("current-weather__substate-label");
-
-      const itemIcon = document.createElement("span");
-      itemIcon.classList.add("material-symbols-outlined", "current-weather__substate-icon");
-
-      const itemName = document.createElement("p");
-      itemName.classList.add("current-weather__substate-name", "text-xs");
-
-      const itemValue = document.createElement("p");
-      itemValue.classList.add("current-weather__substate-value", `${window.innerWidth < 768 ? "text-s" : "text-m"}`);
-
-      itemIcon.textContent = iconSet[key];
-      itemLabel.appendChild(itemIcon);
-
-      itemName.textContent = labelSet[key];
-      itemLabel.appendChild(itemName);
-
-      itemContainer.appendChild(itemLabel);
-
-      itemValue.textContent = `${value}${unit[key] || ""}`;
-      itemContainer.appendChild(itemValue);
-
-      return itemContainer;
-    }
-
-    subStatesItems.forEach((item) => {
-      this.subStates.appendChild(item);
+    keys.forEach(key => {
+      const value = weatherData.current.subStates[key as keyof currentSubStates];
+      const item = this.createSubStateItem(key, value);
+      subStates.appendChild(item);
     });
+
+    return subStates;
   }
 
-  private render() {
+  private createSubStateItem(key: string, value: string | number): HTMLElement {
+    const container = document.createElement("div");
+    container.classList.add("current-weather__substate-item");
+
+    const label = document.createElement("div");
+    label.classList.add("current-weather__substate-label");
+
+    const icon = document.createElement("span");
+    icon.classList.add("material-symbols-outlined", "current-weather__substate-icon");
+    icon.textContent = iconSet[key];
+
+    const name = document.createElement("p");
+    name.classList.add("current-weather__substate-name", "text-xs");
+    name.textContent = labelSet[key];
+
+    const valueEl = document.createElement("p");
+    valueEl.classList.add(
+      "current-weather__substate-value", 
+      window.innerWidth < 768 ? "text-s" : "text-m"
+    );
+    valueEl.textContent = `${value}${unit[key] || ""}`;
+
+    label.append(icon, name);
+    container.append(label, valueEl);
+
+    return container;
+  }
+
+  private render(): void {
     if (window.innerWidth < 768) {
-      this.mobileLeftContainer.appendChild(this.weatherImage.getElement());
+      const leftContainer = document.createElement("div");
+      leftContainer.classList.add("current-weather__mobile-left");
+      leftContainer.appendChild(this.weatherImage.getElement());
 
-      this.mobileRightContainer.appendChild(this.mainState);
-      this.mobileRightContainer.appendChild(this.subStates);
+      const rightContainer = document.createElement("div");
+      rightContainer.classList.add("current-weather__mobile-right");
+      rightContainer.append(this.mainState, this.subStates);
 
-      this.container.appendChild(this.mobileLeftContainer);
-      this.container.appendChild(this.mobileRightContainer);
+      this.container.append(leftContainer, rightContainer);
     } else {
-      this.container.appendChild(this.mainState);
-      this.container.appendChild(this.subStates);
+      this.container.append(this.mainState, this.subStates);
     }
   }
 
-  public getElement() {
+  public getElement(): HTMLElement {
     return this.container;
   }
 }

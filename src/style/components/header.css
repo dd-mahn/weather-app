@@ -7,6 +7,10 @@
   width: fit-content;
   padding: clamp(24px, 20.5714px + 1.0714vw, 36px) 0
     clamp(12px, 10.8571px + 0.3571vw, 16px) 0;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in-out;
+  animation-delay: 0.3s;
+  animation-fill-mode: forwards;
 }
 
 .header__sub-1 {
@@ -31,6 +35,9 @@
 }
 
 @media screen and (min-width: 768px) {
+  #header {
+    /* align-items: start; */
+  }
   .header__sub-2 {
     width: 100%;
   }
@@ -49,9 +56,6 @@
 }
 
 body.morning {
-  #header{
-    width: 100%;
-  }
   .header__sub-2 {
     color: var(--text-light);
   }

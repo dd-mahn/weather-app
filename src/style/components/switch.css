@@ -27,6 +27,12 @@
     align-items: start;
     justify-content: center;
     box-shadow: var(--shadow-button-dark);
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+}
+
+.switch__button:hover {
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
 }
 
 .switch__button.mode-f{
@@ -44,6 +50,10 @@ body.morning{
     .switch__button{
         background: var(--bg-button) !important;
         box-shadow: var(--shadow-button);
+    }
+
+    .switch__button:hover {
+        box-shadow: 0 0 30px rgba(104, 104, 104, 0.3);
     }
 
     .switch__thumb{

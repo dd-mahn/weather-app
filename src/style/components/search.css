@@ -8,6 +8,14 @@
   background: var(--bg-button-dark);
   border-radius: 30px;
   box-shadow: var(--shadow-button-dark);
+  animation: fadeIn 0.5s ease-in-out;
+  animation-fill-mode: forwards;
+  opacity: 0;
+  transition: box-shadow 0.3s ease;
+}
+
+#search-bar:hover {
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
 }
 
 #search-bar input {
@@ -31,6 +39,12 @@
   border-radius: 30px;
   padding: clamp(3px, 2.1429px + 0.2679vw, 6px)
     clamp(10px, 9.4286px + 0.1786vw, 12px);
+  transition: transform 0.2s ease;
+}
+
+#search-bar button:hover {
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
 #search-bar button span {
@@ -52,6 +66,10 @@ body.morning {
   #search-bar {
     background: var(--bg-button);
     box-shadow: var(--shadow-button);
+  }
+
+  #search-bar:hover {
+    box-shadow: 0 0 30px rgba(104, 104, 104, 0.3);
   }
 
   #search-bar input {
